@@ -4,6 +4,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from locators import TestLocators
 from conftest import driver, login
+from constants import BASE_URL
 
 def login_to_site(driver, login):
     WebDriverWait(driver, 10).until(EC.visibility_of_element_located(TestLocators.button_login_in_main)).click()
@@ -12,7 +13,7 @@ def login_to_site(driver, login):
     driver.find_element(*TestLocators.button_login).click()
 
 def test_navigate_to_sauces_block(driver, login):
-    driver.get("https://stellarburgers.nomoreparties.site/")
+    driver.get(BASE_URL)
     login_to_site(driver, login)
 
     WebDriverWait(driver, 10).until(EC.visibility_of_element_located(TestLocators.sauces_block)).click()
@@ -32,7 +33,7 @@ def test_navigate_to_buns_block(driver, login):
     assert driver.find_element(*TestLocators.selected_button).text == "Булки"
 
 def test_navigate_to_fillings_block(driver, login):
-    driver.get("https://stellarburgers.nomoreparties.site/")
+    driver.get(BASE_URL)
     login_to_site(driver, login)
 
     WebDriverWait(driver, 10).until(EC.visibility_of_element_located(TestLocators.sauces_block)).click()

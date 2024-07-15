@@ -5,6 +5,7 @@ from locators import TestLocators
 from conftest import driver
 from helpers import create_random_email, create_random_password
 from data import UsersTestData
+from constants import REGISTER_URL
 
 
 class TestRegistration:
@@ -13,7 +14,7 @@ class TestRegistration:
 
         random_email = create_random_email()
         random_password = create_random_password(8)
-        driver.get("https://stellarburgers.nomoreparties.site/register")
+        driver.get(REGISTER_URL)
 
         WebDriverWait(driver, 10).until(EC.visibility_of_element_located(TestLocators.button_login_in_registration_form)).click()
         WebDriverWait(driver, 6).until(EC.visibility_of_element_located(TestLocators.button_register))
@@ -33,7 +34,7 @@ class TestRegistration:
 
 
     def test_registration_with_invalid_password(self,driver):
-         driver.get("https://stellarburgers.nomoreparties.site/register")
+         driver.get(REGISTER_URL)
          driver.find_element(*TestLocators.input_name).send_keys("Oksana")
          driver.find_element(*TestLocators.input_email).send_keys("oksana_fedorowa_11_004ya.ru")
          driver.find_element(*TestLocators.input_password).send_keys("123")
